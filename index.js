@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import postRoutes from "./routes/posts.js";
 import dotenv from "dotenv";
+import multer from "multer";
 
 const app = express();
 
