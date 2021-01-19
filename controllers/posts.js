@@ -11,7 +11,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage }).single("file");
+const upload = multer({ storage: storage }).single("selectedFile");
 
 export const getPosts = async (req, res) => {
   try {
@@ -24,24 +24,37 @@ export const getPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
   console.log(req.body);
-  // upload(req, res, function (err) {
-  //   console.log(req);
-  //   if (err instanceof multer.MulterError) {
-  //     return res.status(500).json(err);
-  //   } else if (err) {
-  //     return res.status(500).json(err);
-  //   }
+  upload(req, res, function (err) {
+    console.log(req);
+    if (err instanceof multer.MulterError) {
+      return res.status(500).json(err);
+    } else if (err) {
+      return res.status(500).json(err);
+    }
 
-  //   // const newPost = new PostMessage({
-  //   //   ...req.body,
-  //   //   selectedFile: req.file.file,
-  //   // });
-  //   // newPost
-  //   //   .save()
-  //   //   .then(() => res.json(newPost))
-  //   //   .catch((error) => res.status(400).json({ message: error }));
-  // });
+    // const newPost = new PostMessage({
+    //   title: req.body.title,
+    //   message: req.body.message,
+    //   creator: req.body.creator,
+    //   tags: req.body.tags,
+    //   selectedFile: req.files.selectedFile,
+    // });
 
+    // newPost
+    //   .save()
+    //   .then(() => res.json(newPost))
+    //   .catch((error) => res.status(400).json({ message: error }));
+
+    //   // const newPost = new PostMessage({
+    //   //   ...req.body,
+    //   //   selectedFile: req.file.file,
+    //   // });
+    //   // newPost
+    //   //   .save()
+    //   //   .then(() => res.json(newPost))
+    //   //   .catch((error) => res.status(400).json({ message: error }));
+  });
+  console.log(req.files.selectedFile);
   // const post = req.body;
   // console.log(post);
   // const newPost = new PostMessage(post);
